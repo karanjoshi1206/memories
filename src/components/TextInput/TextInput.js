@@ -1,4 +1,6 @@
 import React from "react";
+
+//styles
 import Styles from "./TextInput.module.scss";
 const TextInput = ({
 	labelText = "",
@@ -12,19 +14,6 @@ const TextInput = ({
 }) => {
 	return (
 		<div className={Styles.inputContainer}>
-			{/* // <div>
-		// 	<label htmlFor={name}>{labelText}</label>
-		// 	<input
-		// 		placeholder={placeholderText}
-		// 		id={name}
-		// 		type={type}
-		// 		value={value}
-		// 		name={name}
-		// 		onChange={setValue}
-		// 		onBlur={onBlur}
-		// 	/>
-		// 	{errorText && <p>{errorText}</p>}
-		// </div> */}
 			<div className={Styles.textInputWrapper}>
 				<input
 					className={Styles.textInput}

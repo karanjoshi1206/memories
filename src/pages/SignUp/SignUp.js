@@ -1,17 +1,30 @@
 import React, { useState } from "react";
+
+//styles
 import Styles from "./SignUp.module.scss";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import TextInput from "../../components/TextInput/TextInput";
-import ImageUpload from "../../components/ImageUpload/ImageUpload";
 
 //assets
-import joinUs1 from "../../assets/joinUs1.jpg";
-import joinUs2 from "../../assets/joinUs2.jpg";
-import joinUs3 from "../../assets/joinUs3.jpg";
 import logo from "../../assets/logo.png";
+
+//libraries
+import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+
+//components
+import TextInput from "../../components/TextInput/TextInput";
+import ImageUpload from "../../components/ImageUpload/ImageUpload";
+import AuthStatic from "../../components/AuthStatic/AuthStatic";
+import FormButton from "../../components/FormButton/FormButton";
+
+//pocketbase
+import pb from "../../db/pocketbase";
+import useCustomToast from "../../helpers/useToast";
+
 const SignUp = () => {
+	const { successToast, errorToast } = useCustomToast();
+	const [loading, setLoading] = useState(false);
+	const [avatar, setAvatar] = useState(undefined);
 	const schema = Yup.object({
 		email: Yup.string()
 			.email("Invalid Email Address")
@@ -34,29 +47,37 @@ const SignUp = () => {
 		},
 		validationSchema: schema,
 		onSubmit: async (values) => {
-			console.log("values ", values, avatar);
+			signUpUser(values);
 		},
 	});
 
-	const [avatar, setAvatar] = useState(undefined);
+	const signUpUser = async (values) => {
+		const data = {
+			username: values.username,
+			email: values.email,
+			emailVisibility: true,
+			password: values.password,
+			passwordConfirm: values.confirmPassword,
+			name: values.name,
+		};
+		try {
+			setLoading(true);
+			const authData = await pb.collection("users").create(data);
+			console.log(authData);
+			successToast("Registered Successfully");
+		} catch (error) {
+			if (error.response) {
+				const firstKey = Object.keys(error.response.data)[0];
+				errorToast(error.response.data[firstKey].message);
+			} else {
+				errorToast(error.message);
+			}
+		}
+	};
+
 	return (
 		<div className={Styles.authContainer}>
-			<div className={Styles.authLeft}>
-				<img className={Styles.img1} src={joinUs1} alt='' />
-				<img className={Styles.img2} src={joinUs2} alt='' />
-				<img className={Styles.img3} src={joinUs3} alt='' />
-				<h1 className={Styles.authTitle}>
-					<span>M</span>
-					<span>E</span>
-					<span>M</span>
-					<span>O</span>
-					<span>R</span>
-					<span>I</span>
-					<span>E</span>
-					<span>S</span>
-				</h1>
-				<p>Share Life's Best</p>
-			</div>
+			<AuthStatic />
 			<div className={Styles.authRight}>
 				<div className={Styles.logoContainer}>
 					<img className={Styles.logo} src={logo} alt='Memories' />
@@ -153,21 +174,14 @@ const SignUp = () => {
 						type='file'
 						name='avatar'
 						labelText='avatar'
-						// errorText={
-						// 	formik.touched.avatar
-						// 		? formik.errors.avatar
-						// 			? formik.errors.avatar
-						// 			: null
-						// 		: null
-						// }
 					/>
-
-					<button className={Styles.submitButton}> Button</button>
-					<p className={Styles.bottomText}>
-						<span>Already have account?</span>
-						<Link>Login</Link>
-					</p>
+					<FormButton loading={loading} type='submit' title='Signup' />
+					{/* <button> Signup</button> */}
 				</form>
+				<p className={Styles.bottomText}>
+					<span>Already have account?</span>
+					<Link to={"/login"}>Login</Link>
+				</p>
 			</div>
 		</div>
 	);
