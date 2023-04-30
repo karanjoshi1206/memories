@@ -1,0 +1,11 @@
+login-->> email/username || password
+signup-->> email || username || avatar || password || confirmpassword 
+homescreen -->> show the users memories 
+
+components
+memoryCard--> image || caption || createdOn || edit || delete
+
+memoryDetails-->> Fullscreen modal-->> image || caption || about || share (temp) || edit || delete
+
+edit-->> open memoryDetails with mode edit --> with editable field ||  cancel and edit button
+delete -->> show popup with confirmation message || cancel || delete buttons

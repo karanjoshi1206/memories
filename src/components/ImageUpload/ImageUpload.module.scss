@@ -1,0 +1,32 @@
+.imageUploadContainer {
+    label {
+        display: block;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.582);
+    }
+
+    .fileContainer {
+        padding: 50px;
+        border: 2px dashed rgba(255, 255, 255, 0.582);
+        border-radius: 5px;
+        margin: 5px 0;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            color: rgba(255, 255, 255, 0.582);
+        }
+
+        .previewAvatar {
+            height: 80px;
+            width: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+    }
+}
