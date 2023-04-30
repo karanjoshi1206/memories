@@ -19,9 +19,10 @@ const AuthStatic = () => {
 				<span>M</span>
 				<span>O</span>
 				<span>R</span>
-				<span>I</span>
-				<span>E</span>
-				<span>S</span>
+				<span>Y</span>
+				<span>B</span>
+				<span>O</span>
+				<span>X</span>
 			</h1>
 			<p>Share Life's Best</p>
 		</div>
