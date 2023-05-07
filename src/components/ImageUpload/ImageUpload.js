@@ -52,7 +52,7 @@ const ImageUpload = ({
 					/>
 				)}
 
-				<p>Select Avatar </p>
+				<p>{placeholderText} </p>
 			</div>
 			<input
 				hidden

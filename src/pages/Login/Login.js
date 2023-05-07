@@ -104,7 +104,7 @@ const Login = () => {
 					/>
 
 					{/* <button className={Styles.submitButton}> Login</button> */}
-					<FormButton type='submit' loading={false} title='Login' />
+					<FormButton type='submit' loading={loading} title='Login' />
 					<p className={Styles.bottomText}>
 						<span>Don't have account?</span>
 						<Link to={"/signUp"}>Signup</Link>

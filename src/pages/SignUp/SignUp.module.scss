@@ -16,8 +16,14 @@
         border-left: 1px solid lightgrey;
         background-color: #212121;
 
+        @media screen and (max-width:980px) {
+            display: block;
+        }
+
         .formContainer {
-            padding: 0 140px;
+            @media screen and (max-width:980px) {
+                padding: 0 40px;
+            }
         }
 
         .logoContainer {

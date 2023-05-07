@@ -13,18 +13,10 @@ const AuthStatic = () => {
 			<img className={Styles.img1} src={joinUs1} alt='' />
 			<img className={Styles.img2} src={joinUs2} alt='' />
 			<img className={Styles.img3} src={joinUs3} alt='' />
-			<h1 className={Styles.authTitle}>
-				<span>M</span>
-				<span>E</span>
-				<span>M</span>
-				<span>O</span>
-				<span>R</span>
-				<span>Y</span>
-				<span>B</span>
-				<span>O</span>
-				<span>X</span>
-			</h1>
-			<p>Share Life's Best</p>
+			<div className={Styles.titleContainer}>
+				<h1 className={Styles.authTitle}>MEMORYBOX</h1>
+				<p>Share Life's Best</p>
+			</div>
 		</div>
 	);
 };

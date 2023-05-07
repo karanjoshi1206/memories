@@ -1,0 +1,37 @@
+html {
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* rounded borders for table rows and table heads */
+.tr-border-radius>th:first-child,
+td:first-child {
+	border-radius: 5px 0 0 5px;
+}
+
+.tr-border-radius>th:last-child,
+td:last-child {
+	border-radius: 0 5px 5px 0;
+}
+
+@mixin hideScrollbar {
+
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	& {
+		-ms-overflow-style: none;
+		/* IE and Edge */
+		scrollbar-width: none;
+		/* Firefox */
+	}
+}

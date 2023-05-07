@@ -5,8 +5,11 @@
 .textInputWrapper {
     position: relative;
     min-width: 450px;
-    // width: 100%;
     --accent-color: #a3e583;
+
+    @media screen and (max-width:980px) {
+        min-width: 100%;
+    }
 }
 
 .textInputWrapper:before {
@@ -77,6 +80,11 @@
     border-left: none;
     border-bottom: none;
     border-right: none;
+
+    &.textArea {
+        max-height: unset;
+        resize: none;
+    }
 }
 
 .textInputWrapper .textInput:focus,

@@ -8,7 +8,7 @@ import logo from "../../assets/logo.png";
 
 //libraries
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
 //components
@@ -22,6 +22,7 @@ import pb from "../../db/pocketbase";
 import useCustomToast from "../../helpers/useToast";
 
 const SignUp = () => {
+	const navigate = useNavigate();
 	const { successToast, errorToast } = useCustomToast();
 	const [loading, setLoading] = useState(false);
 	const [avatar, setAvatar] = useState(undefined);
@@ -65,6 +66,7 @@ const SignUp = () => {
 			const authData = await pb.collection("users").create(data);
 			console.log(authData);
 			successToast("Registered Successfully");
+			navigate("/feeds");
 		} catch (error) {
 			if (error.response) {
 				const firstKey = Object.keys(error.response.data)[0];
