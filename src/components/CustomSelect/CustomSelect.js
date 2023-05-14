@@ -1,49 +1,27 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Styles from "./CustomSelect.module.scss";
 import { RxCaretDown } from "react-icons/rx";
+import useOnClickOutside from "../../helpers/customHooks/useOnClickOutside";
 const CustomSelect = ({
-	values = [
-		{
-			label: "Karan Joshi",
-			value: {
-				id: "12344",
-				userName: "Karan Joshi",
-				avatar:
-					"https://memorybox.fly.dev/api/files/e8ucon8imwkcrkl/2omrqymwpetuv1a/memories_logo_YLELzkTUuG.png?token=",
-			},
-		},
-		{
-			label: "Tesst Joshi",
-			value: {
-				id: "12344",
-				userName: "Karan Joshi",
-				avatar:
-					"https://memorybox.fly.dev/api/files/e8ucon8imwkcrkl/2omrqymwpetuv1a/memories_logo_YLELzkTUuG.png?token=",
-			},
-		},
-		{
-			label: "Tesst Joshi",
-			value: {
-				id: "12344",
-				userName: "Karan Joshi",
-				avatar:
-					"https://memorybox.fly.dev/api/files/e8ucon8imwkcrkl/2omrqymwpetuv1a/memories_logo_YLELzkTUuG.png?token=",
-			},
-		},
-	],
+	values = [],
 	setValue = () => {},
 	onChange = () => {},
 	label = "Select value",
 	currentValue = { label: "", value: "" },
 	search = true,
 	isUser = true,
+	multiSelect = false,
+	selectedValue = [],
 }) => {
+	values?.map((elem) => console.log(elem));
 	const [isOpen, setIsOpen] = useState(false);
 	const [displayValue, setDisplayValue] = useState(currentValue);
 	const [searchText, setSearchText] = useState("");
+	const selectRef = useRef(null);
+	useOnClickOutside(selectRef, () => setIsOpen(false));
 	return (
-		<div className={Styles.customSelect}>
+		<div ref={selectRef} className={Styles.customSelect}>
 			<div
 				onClick={() => setIsOpen((val) => !val)}
 				className={`${Styles.customSelectHeader} ${
@@ -72,13 +50,31 @@ const CustomSelect = ({
 							)
 							.map((elem) => (
 								<li
+									key={elem?.value?.id || elem.label}
 									onClick={() => {
-										setValue(elem);
 										onChange();
-										setDisplayValue(elem);
-										setIsOpen(false);
+										if (multiSelect) {
+											if (
+												!selectedValue.some((element) => element === elem.value)
+											) {
+												const newValue = [...selectedValue, elem.value];
+												setValue(newValue);
+											} else {
+												const newValue = selectedValue?.filter(
+													(element) => element !== elem.value
+												);
+												console.log(newValue);
+												setValue(newValue);
+											}
+										} else {
+											setValue(elem);
+											setDisplayValue(elem);
+											setIsOpen(false);
+										}
 									}}
-									className={Styles.customSelectListItem}>
+									className={`${Styles.customSelectListItem} ${
+										selectedValue.includes(elem.value) && Styles.selectedUser
+									}`}>
 									{isUser && (
 										<span>
 											<img src={elem.value.avatar} alt={elem.value.userName} />

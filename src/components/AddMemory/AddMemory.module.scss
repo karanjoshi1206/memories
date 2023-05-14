@@ -1,0 +1,25 @@
+.privateMemoryContainer {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.taggedUsers {
+    display: flex;
+    gap: 20px;
+
+
+    .taggedUserContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 10px 5px 15px;
+        border: 1px solid lightgray;
+        border-radius: 20px;
+        color: white;
+        font-size: 12px;
+
+    }
+}
