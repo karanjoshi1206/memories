@@ -35,9 +35,7 @@ const Modal = ({
 					{showEditButton && !editMode && (
 						<button
 							className='modal__edit-button'
-							onClick={() => setEditMode((prev) => !prev)}>
-							{/* <img src={EditImage} alt='edit' /> */}
-						</button>
+							onClick={() => setEditMode((prev) => !prev)}></button>
 					)}
 				</div>
 				{loading ? (
